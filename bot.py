@@ -5,6 +5,7 @@ from telegram.ext import Updater, MessageHandler, Filters
 
 from constants import TELEGRAM_BOT_TOKEN
 from handlers.store_thought_handler import store_thought_handler
+from handlers.update_thought_hander import update_thought_handler
 
 load_dotenv()
 
@@ -20,8 +21,15 @@ def main() -> None:
 
     updater.dispatcher.add_handler(
         MessageHandler(
-            Filters.text & (~Filters.command),
+            Filters.text & (~Filters.command) & (~Filters.update.edited_message),
             store_thought_handler
+        )
+    )
+
+    updater.dispatcher.add_handler(
+        MessageHandler(
+            Filters.update & (~Filters.command) & Filters.text,
+            update_thought_handler
         )
     )
 
