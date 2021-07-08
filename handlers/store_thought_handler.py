@@ -5,9 +5,7 @@ from models.thought import Thought
 
 
 def store_thought_handler(update: Update, context: CallbackContext):
-    thought = Thought(
-        message=update.message
-    )
+    thought = Thought(message=update.message)
 
     try:
         thought.save()
