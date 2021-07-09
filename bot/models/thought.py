@@ -3,6 +3,7 @@ import logging
 from telegram import Message
 
 from constants import firestore_db
+from utils import current_milli_time
 
 logger = logging.getLogger(__name__)
 
@@ -18,11 +19,13 @@ class Thought:
         self.content = message.text
         self.id = thought_id
         self.telegram_user_id = message.chat_id
+        self.created_at = current_milli_time()
 
     def to_json(self):
         return {
             'content': self.content,
-            'telegram_user_id': self.telegram_user_id
+            'telegram_user_id': self.telegram_user_id,
+            'created_at': self.created_at
         }
 
     def save(self):
@@ -33,4 +36,4 @@ class Thought:
     def update_message(self, updated_content: str):
         stream_collection \
             .document(self.id) \
-            .set({"content": updated_content})
+            .update({"content": updated_content})
