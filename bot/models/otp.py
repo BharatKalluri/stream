@@ -18,7 +18,10 @@ class Otp:
         return SystemRandom().randint(100000, 999999)
 
     def to_json(self) -> dict:
-        return self.__dict__
+        return {
+            'otp': self.otp,
+            'telegram_user_id': self.telegram_user_id
+        }
 
     def save(self) -> None:
         otp_collection \

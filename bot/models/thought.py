@@ -20,7 +20,10 @@ class Thought:
         self.telegram_user_id = message.chat_id
 
     def to_json(self):
-        return self.__dict__
+        return {
+            'content': self.content,
+            'telegram_user_id': self.telegram_user_id
+        }
 
     def save(self):
         stream_collection \
