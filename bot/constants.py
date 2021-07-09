@@ -1,12 +1,14 @@
 import os
 
-import supabase_py
+import firebase_admin
 from dotenv import load_dotenv
+from firebase_admin import credentials
+from firebase_admin import firestore
 
 load_dotenv()
 
 TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
-SUPABASE_URL = os.getenv('SUPABASE_URL')
-SUPABASE_KEY = os.getenv('SUPABASE_KEY')
 
-supabase_client = supabase_py.create_client(supabase_url=SUPABASE_URL, supabase_key=SUPABASE_KEY)
+cred = credentials.Certificate("./firebase-admin-key.json")
+firebase_admin.initialize_app(cred)
+firestore_db = firestore.client()

@@ -1,11 +1,9 @@
 import logging
 from random import SystemRandom
 
-from supabase_py.lib.query_builder import SupabaseQueryBuilder
+from constants import firestore_db
 
-from constants import supabase_client
-
-otp_table: SupabaseQueryBuilder = supabase_client.table("otp")
+otp_collection = firestore_db.collection('otp')
 
 logger = logging.getLogger(__name__)
 
@@ -16,12 +14,6 @@ class Otp:
         self.telegram_user_id = for_telegram_user_id
 
     @staticmethod
-    def check_response_or_throw(response, error_message: str) -> None:
-        if int(response["status_code"] / 200) == 2:
-            logger.error(response)
-            raise Exception(error_message)
-
-    @staticmethod
     def generate_otp() -> int:
         return SystemRandom().randint(100000, 999999)
 
@@ -29,5 +21,6 @@ class Otp:
         return self.__dict__
 
     def save(self) -> None:
-        response = otp_table.insert(self.to_json()).execute()
-        self.check_response_or_throw(response, "generated otp is invalid :(")
+        otp_collection \
+            .document(f'{self.telegram_user_id}_{self.otp}') \
+            .set(self.to_json())
