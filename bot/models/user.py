@@ -1,4 +1,5 @@
 import uuid
+from typing import List
 
 from google.cloud.firestore_v1 import DocumentSnapshot, CollectionReference
 
@@ -16,7 +17,7 @@ class User:
             'telegram_user_id': self.telegram_user_id
         }
 
-    def get(self) -> list[DocumentSnapshot]:
+    def get(self) -> List[DocumentSnapshot]:
         return list(user_collection
                     .where('telegram_user_id', '==', self.telegram_user_id)
                     .stream())
@@ -31,5 +32,5 @@ class User:
 
     @staticmethod
     def get_telegram_ids():
-        user_list: list[DocumentSnapshot] = list(user_collection.stream())
+        user_list: List[DocumentSnapshot] = list(user_collection.stream())
         return [el.get('telegram_user_id') for el in user_list]
