@@ -5,9 +5,13 @@ from models.thought import Thought
 
 
 def update_thought_handler(update: Update, context: CallbackContext):
-    thought = Thought(update.edited_message)
+    message = update.edited_message
     try:
-        thought.update_message(update.edited_message.text)
+        Thought.update_message(
+            telegram_message_id=message.message_id,
+            telegram_user_id=message.chat_id,
+            updated_content=message.text
+        )
     except BaseException as e:
         # Too broad exception
         update.message.reply_text(str(e))

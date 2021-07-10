@@ -1,12 +1,24 @@
 import logging
 
 from dotenv import load_dotenv
-from telegram.ext import Updater, MessageHandler, Filters, CommandHandler
+from telegram import Bot
+from telegram.ext import (
+    Updater,
+    MessageHandler,
+    Filters,
+    CommandHandler,
+    CallbackQueryHandler,
+)
 
 from constants import TELEGRAM_BOT_TOKEN
+from handlers.callback_query_handler import callback_query_handler
+from handlers.log_mood_handler import log_mood_handler
 from handlers.login_command_handler import login_command_handler
+from handlers.start_command_handler import start_command_handler
 from handlers.store_thought_handler import store_thought_handler
 from handlers.update_thought_hander import update_thought_handler
+from reminder import setup_reminders
+from utils import run_continuously
 
 load_dotenv()
 
@@ -17,7 +29,18 @@ logger = logging.getLogger(__name__)
 
 
 def main() -> None:
-    updater = Updater(TELEGRAM_BOT_TOKEN)
+    updater: Updater = Updater(TELEGRAM_BOT_TOKEN)
+    bot: Bot = updater.bot
+
+    cease_continuous_run = run_continuously()
+
+    setup_reminders(bot=bot)
+
+    updater.dispatcher.add_handler(CommandHandler("start", start_command_handler))
+
+    updater.dispatcher.add_handler(CommandHandler("log_mood", log_mood_handler))
+
+    updater.dispatcher.add_handler(CallbackQueryHandler(callback_query_handler))
 
     updater.dispatcher.add_handler(
         MessageHandler(
@@ -35,7 +58,11 @@ def main() -> None:
     updater.dispatcher.add_handler(CommandHandler("login", login_command_handler))
 
     updater.start_polling()
+
     updater.idle()
+
+    logger.info("Stopping reminder system")
+    cease_continuous_run.set()
 
 
 if __name__ == "__main__":
