@@ -19,11 +19,11 @@ def reminder(event_type: ReminderEventType, bot: Bot):
 
 def setup_reminders(bot: Bot):
     for reminder_config in REMINDER_CONFIG:
-        every_config = reminder_config.get('every')
+        every_config = reminder_config.get('every', 1)
         unit_config = reminder_config.get('unit')
         at_config = reminder_config.get('at')
 
-        job = schedule.every(every_config) if every_config else schedule.every()
+        job = schedule.every(interval=every_config)
         job = getattr(job, unit_config) if unit_config else job
         job = job.at(at_config) if at_config else job
 
