@@ -18,6 +18,8 @@ from handlers.start_command_handler import start_command_handler
 from handlers.store_thought_handler import store_thought_handler
 from handlers.update_thought_hander import update_thought_handler
 from modules.reminders.reminder import setup_reminders
+from modules.routines.routine_config import ROUTINE_CONFIG
+from modules.routines.routine_constructor import routine_constructor
 from utils import run_continuously
 
 load_dotenv()
@@ -35,6 +37,9 @@ def main() -> None:
     cease_continuous_run = run_continuously()
 
     setup_reminders(bot=bot)
+
+    for routine_key in list(ROUTINE_CONFIG.keys()):
+        updater.dispatcher.add_handler(routine_constructor(routine_key))
 
     updater.dispatcher.add_handler(CommandHandler("start", start_command_handler))
     updater.dispatcher.add_handler(CommandHandler("log_mood", log_mood_handler))

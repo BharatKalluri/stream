@@ -1,3 +1,4 @@
+import json
 import os
 from enum import Enum
 
@@ -9,8 +10,10 @@ from firebase_admin import firestore
 load_dotenv()
 
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
+FIREBASE_CERT = json.loads(os.getenv("FIREBASE_CERT"))
 
-cred = credentials.Certificate("./firebase-admin-key.json")
+cred = credentials.Certificate(FIREBASE_CERT)
+
 firebase_admin.initialize_app(cred)
 firestore_db = firestore.client()
 
