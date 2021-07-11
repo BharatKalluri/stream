@@ -11,7 +11,7 @@ def store_thought_handler(update: Update, context: CallbackContext):
         content=message.text,
         created_at=current_milli_time(),
         telegram_user_id=message.chat_id,
-        telegram_message_id=message.message_id
+        telegram_message_id=message.message_id,
     )
 
     try:

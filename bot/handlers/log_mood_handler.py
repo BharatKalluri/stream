@@ -5,7 +5,7 @@ from telegram.ext import CallbackContext
 
 
 class MoodEvent:
-    event_name = 'mood'
+    event_name = "mood"
 
     def __init__(self, value: int):
         self.event = MoodEvent.event_name
@@ -15,10 +15,7 @@ class MoodEvent:
         return self.__dict__
 
 
-def log_mood_handler(
-        update: Update,
-        context: CallbackContext
-) -> None:
+def log_mood_handler(update: Update, context: CallbackContext) -> None:
     keyboard_entries = [
         InlineKeyboardButton(str(el), callback_data=json.dumps(MoodEvent(el).to_dict()))
         for el in [1, 2, 3, 4, 5]
