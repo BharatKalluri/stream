@@ -23,5 +23,5 @@ class ReminderEventType(Enum):
 
 
 REMINDER_EVENT_TO_MESSAGE_MAP = {
-    ReminderEventType.MOOD: "note your mood on a scale of 1 to 5 using /log_mood"
+    ReminderEventType.MOOD: "note your mood on a scale of 1 to 5 using /mood"
 }

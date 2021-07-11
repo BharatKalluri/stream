@@ -36,4 +36,11 @@ ROUTINE_CONFIG = {
             "reply_keyboard": YES_NO_KEYBOARD,
         },
     },
+    "mood": {
+        1: {
+            "question": "How are you feeling?",
+            "hashtag": "#mood",
+            "reply_keyboard": FIVE_SCALE_KEYBOARD,
+        }
+    },
 }

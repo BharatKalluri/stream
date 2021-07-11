@@ -12,7 +12,6 @@ from telegram.ext import (
 
 from constants import TELEGRAM_BOT_TOKEN
 from handlers.callback_query_handler import callback_query_handler
-from handlers.log_mood_handler import log_mood_handler
 from handlers.login_command_handler import login_command_handler
 from handlers.start_command_handler import start_command_handler
 from handlers.store_thought_handler import store_thought_handler
@@ -42,7 +41,6 @@ def main() -> None:
         updater.dispatcher.add_handler(routine_constructor(routine_key))
 
     updater.dispatcher.add_handler(CommandHandler("start", start_command_handler))
-    updater.dispatcher.add_handler(CommandHandler("log_mood", log_mood_handler))
 
     updater.dispatcher.add_handler(CallbackQueryHandler(callback_query_handler))
 
