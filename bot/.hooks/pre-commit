@@ -1,0 +1,10 @@
+#!/bin/sh
+
+set -e
+
+echo "running black"
+ls
+
+black .
+
+exit 0
