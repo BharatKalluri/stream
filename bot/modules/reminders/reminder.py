@@ -5,7 +5,7 @@ from telegram import Bot
 
 from constants import ReminderEventType, REMINDER_EVENT_TO_MESSAGE_MAP
 from models.user import User
-from reminder_config import REMINDER_CONFIG
+from modules.reminders.reminder_config import REMINDER_CONFIG
 
 logger = logging.getLogger(__name__)
 

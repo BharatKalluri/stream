@@ -17,7 +17,7 @@ from handlers.login_command_handler import login_command_handler
 from handlers.start_command_handler import start_command_handler
 from handlers.store_thought_handler import store_thought_handler
 from handlers.update_thought_hander import update_thought_handler
-from reminder import setup_reminders
+from modules.reminders.reminder import setup_reminders
 from utils import run_continuously
 
 load_dotenv()
@@ -37,7 +37,6 @@ def main() -> None:
     setup_reminders(bot=bot)
 
     updater.dispatcher.add_handler(CommandHandler("start", start_command_handler))
-
     updater.dispatcher.add_handler(CommandHandler("log_mood", log_mood_handler))
 
     updater.dispatcher.add_handler(CallbackQueryHandler(callback_query_handler))
@@ -48,13 +47,11 @@ def main() -> None:
             store_thought_handler,
         )
     )
-
     updater.dispatcher.add_handler(
         MessageHandler(
             Filters.update & (~Filters.command) & Filters.text, update_thought_handler
         )
     )
-
     updater.dispatcher.add_handler(CommandHandler("login", login_command_handler))
 
     updater.start_polling()
