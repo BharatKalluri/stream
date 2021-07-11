@@ -34,6 +34,7 @@ class Thought:
         return thought
 
     def save(self):
+        logger.debug(f"saving thought {self.to_json()}")
         stream_collection.document(self.id).set(self.to_json())
 
     @staticmethod
