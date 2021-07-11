@@ -1,5 +1,6 @@
 FIVE_SCALE_KEYBOARD = [[1, 2], [3, 4, 5]]
 YES_NO_KEYBOARD = [["yes", "no"]]
+COMMANDS_TO_RECORD_WHEN_INIT = ["sleep", "awake"]
 
 ROUTINE_CONFIG = {
     "sleep": {

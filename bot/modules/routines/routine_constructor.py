@@ -11,7 +11,7 @@ from telegram.ext import (
 )
 
 from models.thought import Thought
-from modules.routines.routine_config import ROUTINE_CONFIG
+from modules.routines.routine_config import ROUTINE_CONFIG, COMMANDS_TO_RECORD_WHEN_INIT
 from utils import current_milli_time
 
 logger = logging.getLogger(__name__)
@@ -37,10 +37,21 @@ def routine_constructor(routine_name: str) -> ConversationHandler:
             if reply_keyboard_config
             else ReplyKeyboardRemove()
         )
+
+        if routine_name in COMMANDS_TO_RECORD_WHEN_INIT:
+            message_to_store = f"#{routine_name}"
+            Thought(
+                content=message_to_store,
+                telegram_user_id=update.effective_user.id,
+                created_at=current_milli_time(),
+                telegram_message_id=None,
+            ).save()
+
         update.message.reply_text(
             f"Lets get started! {question_in_queue} (/cancel)",
             reply_markup=reply_keyboard_markup,
         )
+
         return 1
 
     def step_qa_constructor(
