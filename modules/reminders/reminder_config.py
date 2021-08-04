@@ -1,7 +1,6 @@
 from constants import ReminderEventType
 
 REMINDER_CONFIG = [
-    # Mood tracking
     {
         "at": "09:00",
         "unit": "day",
@@ -26,5 +25,15 @@ REMINDER_CONFIG = [
         "at": "22:00",
         "unit": "day",
         "event_type": ReminderEventType.MOOD,
+    },
+    {
+        "at": "23:45",
+        "unit": "day",
+        "event_type": ReminderEventType.SLEEP,
+    },
+    {
+        "at": "9:00",
+        "unit": "day",
+        "event_type": ReminderEventType.AWAKE,
     },
 ]

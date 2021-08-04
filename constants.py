@@ -20,8 +20,12 @@ firestore_db = firestore.client()
 
 class ReminderEventType(Enum):
     MOOD = "MOOD"
+    SLEEP = "SLEEP"
+    AWAKE = "AWAKE"
 
 
 REMINDER_EVENT_TO_MESSAGE_MAP = {
-    ReminderEventType.MOOD: "note your mood on a scale of 1 to 5 using /mood"
+    ReminderEventType.MOOD: "Record your mood using /mood",
+    ReminderEventType.SLEEP: "Close your day by filling in /sleep",
+    ReminderEventType.AWAKE: "Good morning! Hit /awake and fill in some deets!",
 }
