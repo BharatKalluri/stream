@@ -32,7 +32,7 @@ REMINDER_CONFIG = [
         "event_type": ReminderEventType.SLEEP,
     },
     {
-        "at": "9:00",
+        "at": "09:00",
         "unit": "day",
         "event_type": ReminderEventType.AWAKE,
     },
