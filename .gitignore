@@ -2,3 +2,5 @@ venv
 firebase-admin-key.json
 __pycache__
 .env
+.idea
+*.log
