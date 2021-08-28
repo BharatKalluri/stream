@@ -24,8 +24,10 @@ from utils import run_continuously
 load_dotenv()
 
 logging.basicConfig(
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.DEBUG,
-    filename='thought-stream.log', filemode='a',
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    level=logging.DEBUG,
+    filename="thought-stream.log",
+    filemode="a",
 )
 logger = logging.getLogger(__name__)
 
