@@ -57,7 +57,7 @@ def routine_constructor(routine_name: str) -> ConversationHandler:
         question_in_queue = question_config.get("question")
 
         if should_record_init is True:
-            message_to_store = f"#{routine_name}"
+            message_to_store = update.message.text.replace('/', '#')
             Thought(
                 content=message_to_store,
                 telegram_user_id=update.effective_user.id,
