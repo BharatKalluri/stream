@@ -1,21 +1,15 @@
-import json
 import os
 from enum import Enum
 
-import firebase_admin
 from dotenv import load_dotenv
-from firebase_admin import credentials
-from firebase_admin import firestore
+from mongoengine import connect
 
 load_dotenv()
 
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
-FIREBASE_CERT = json.loads(os.getenv("FIREBASE_CERT"))
-
-cred = credentials.Certificate(FIREBASE_CERT)
-
-firebase_admin.initialize_app(cred)
-firestore_db = firestore.client()
+TELEGRAM_USER_ID = 571637265
+MONGODB_URL = os.getenv("MONGODB_URL")
+connect(host=MONGODB_URL)
 
 
 class ReminderEventType(Enum):

@@ -3,8 +3,7 @@ import logging
 import schedule
 from telegram import Bot
 
-from constants import ReminderEventType, REMINDER_EVENT_TO_MESSAGE_MAP
-from models.user import User
+from constants import ReminderEventType, REMINDER_EVENT_TO_MESSAGE_MAP, TELEGRAM_USER_ID
 from modules.reminders.reminder_config import REMINDER_CONFIG
 
 logger = logging.getLogger(__name__)
@@ -12,9 +11,7 @@ logger = logging.getLogger(__name__)
 
 def reminder(event_type: ReminderEventType, bot: Bot):
     message = REMINDER_EVENT_TO_MESSAGE_MAP.get(event_type)
-    user_id_list = User.get_telegram_ids()
-    for telegram_user_id in user_id_list:
-        bot.send_message(text=message, chat_id=telegram_user_id)
+    bot.send_message(text=message, chat_id=TELEGRAM_USER_ID)
 
 
 def setup_reminders(bot: Bot):
