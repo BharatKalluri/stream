@@ -1,5 +1,6 @@
 python-telegram-bot
 python-dotenv
-firebase-admin
+mongoengine
 schedule
 parsedatetime
+pymongo[srv]

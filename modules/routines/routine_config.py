@@ -7,12 +7,12 @@ ROUTINE_CONFIG = {
         "steps": [
             {
                 "question": "How happy did you feel today, on a scale of 1 to 5?",
-                "hashtag": "#perceived_happiness",
+                "key": "perceived_happiness",
                 "reply_keyboard": FIVE_SCALE_KEYBOARD,
             },
             {
                 "question": "How stressed did you feel today?",
-                "hashtag": "#perceived_stress",
+                "key": "perceived_stress",
                 "reply_keyboard": {
                     5: "Very calm and aware",
                     4: "Calm & relaxed",
@@ -24,7 +24,7 @@ ROUTINE_CONFIG = {
             },
             {
                 "question": "When was your last caffeine drink?",
-                "hashtag": "#last_caffeine_drink",
+                "key": "last_caffeine_drink",
                 "reply_keyboard": {
                     5: "Before 3pm",
                     4: "Before 5pm",
@@ -36,12 +36,12 @@ ROUTINE_CONFIG = {
             },
             {
                 "question": "Did you nap today?",
-                "hashtag": "#nap",
+                "key": "nap",
                 "reply_keyboard": YES_NO_KEYBOARD,
             },
             {
                 "question": "How healthy do you feel?",
-                "hashtag": "#healthy_feel",
+                "key": "healthy_feel",
                 "reply_keyboard": {
                     5: "Fully healthy & energized",
                     4: "Healthy",
@@ -53,7 +53,7 @@ ROUTINE_CONFIG = {
             },
             {
                 "question": "Do you feel like you'd have needed more time by yourself?",
-                "hashtag": "#time_by_myself",
+                "key": "time_by_myself",
                 "reply_keyboard": {
                     5: "No",
                     4: "I've had just enough time",
@@ -65,7 +65,7 @@ ROUTINE_CONFIG = {
             },
             {
                 "question": "Did you feel like you were in control over your time and schedule?",
-                "hashtag": "#control_of_time",
+                "key": "control_of_time",
                 "reply_keyboard": {
                     5: "In full control",
                     4: "In control, some constraints",
@@ -77,7 +77,7 @@ ROUTINE_CONFIG = {
             },
             {
                 "question": "Do you feel like you need to socialize more?",
-                "hashtag": "#need_to_socalize",
+                "key": "need_to_socalize",
                 "reply_keyboard": {
                     5: "No",
                     4: "Almost perfect amount",
@@ -89,7 +89,7 @@ ROUTINE_CONFIG = {
             },
             {
                 "question": "Did you learn/try something new? (skill or activity)",
-                "hashtag": "#learning",
+                "key": "learning",
                 "reply_keyboard": {
                     5: "Learned multiple new things",
                     4: "Learned some new things",
@@ -101,7 +101,7 @@ ROUTINE_CONFIG = {
             },
             {
                 "question": "How much did you go out of comfort zone today?",
-                "hashtag": "#out_of_comfort_zone",
+                "key": "out_of_comfort_zone",
                 "reply_keyboard": {
                     5: "Did something(s) I was really scared about",
                     4: "Did something(s) I was worried about",
@@ -113,7 +113,7 @@ ROUTINE_CONFIG = {
             },
             {
                 "question": "Did you work on any technical challenges and problem solving?",
-                "hashtag": "#problem_solving",
+                "key": "problem_solving",
                 "reply_keyboard": {
                     5: "Exciting challenges",
                     4: "Interesting challenges",
@@ -125,24 +125,24 @@ ROUTINE_CONFIG = {
             },
             {
                 "question": "How many (number) work meetings did you have today? This includes work-related phone calls",
-                "hashtag": "#number_of_work_meetings",
+                "key": "number_of_work_meetings",
             },
             {
                 "question": "What do you think was the main influence to your mood ratings today? (can skip by entering 'skip')",
-                "hashtag": "#mood_notes",
+                "key": "mood_notes",
             },
             {
                 "question": "What was your main accomplishment of today",
-                "hashtag": "#main_accomplishment_today",
+                "key": "main_accomplishment_today",
             },
             {
                 "question": "Do you feel excited about what's ahead in the future?",
-                "hashtag": "#exited_about_future",
+                "key": "exited_about_future",
                 "reply_keyboard": YES_NO_KEYBOARD,
             },
             {
                 "question": "worry about the future?",
-                "hashtag": "#worry_about_future",
+                "key": "worry_about_future",
                 "reply_keyboard": FIVE_SCALE_KEYBOARD,
             },
         ]
@@ -151,7 +151,7 @@ ROUTINE_CONFIG = {
         "steps": [
             {
                 "question": "sleep quality?",
-                "hashtag": "#sleep_quality",
+                "key": "sleep_quality",
                 "reply_keyboard": {
                     5: "Excellent, feeling refreshed",
                     4: "Great, feeling good",
@@ -163,7 +163,7 @@ ROUTINE_CONFIG = {
             },
             {
                 "question": "any nightmares?",
-                "hashtag": "#nightmares",
+                "key": "nightmares",
                 "reply_keyboard": YES_NO_KEYBOARD,
             },
         ]
@@ -173,7 +173,7 @@ ROUTINE_CONFIG = {
         "steps": [
             {
                 "question": "How are you feeling?",
-                "hashtag": "#mood",
+                "key": "mood",
                 "reply_keyboard": {
                     5: "pumped, energized",
                     4: "happy, excited",

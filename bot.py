@@ -6,16 +6,12 @@ from telegram.ext import (
     Updater,
     MessageHandler,
     Filters,
-    CommandHandler,
     CallbackQueryHandler,
 )
 
 from constants import TELEGRAM_BOT_TOKEN
 from handlers.callback_query_handler import callback_query_handler
-from handlers.login_command_handler import login_command_handler
-from handlers.start_command_handler import start_command_handler
 from handlers.store_thought_handler import store_thought_handler
-from handlers.update_thought_hander import update_thought_handler
 from modules.reminders.reminder import setup_reminders
 from modules.routines.routine_config import ROUTINE_CONFIG
 from modules.routines.routine_constructor import routine_constructor
@@ -43,8 +39,6 @@ def main() -> None:
     for routine_key in list(ROUTINE_CONFIG.keys()):
         updater.dispatcher.add_handler(routine_constructor(routine_key))
 
-    updater.dispatcher.add_handler(CommandHandler("start", start_command_handler))
-
     updater.dispatcher.add_handler(CallbackQueryHandler(callback_query_handler))
 
     updater.dispatcher.add_handler(
@@ -53,12 +47,6 @@ def main() -> None:
             store_thought_handler,
         )
     )
-    updater.dispatcher.add_handler(
-        MessageHandler(
-            Filters.update & (~Filters.command) & Filters.text, update_thought_handler
-        )
-    )
-    updater.dispatcher.add_handler(CommandHandler("login", login_command_handler))
 
     updater.start_polling()
 

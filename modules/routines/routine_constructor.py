@@ -10,9 +10,8 @@ from telegram.ext import (
     CommandHandler,
 )
 
-from models.thought import Thought
+from models.log import Log
 from modules.routines.routine_config import ROUTINE_CONFIG
-from utils import current_milli_time
 
 logger = logging.getLogger(__name__)
 
@@ -57,13 +56,8 @@ def routine_constructor(routine_name: str) -> ConversationHandler:
         question_in_queue = question_config.get("question")
 
         if should_record_init is True:
-            message_to_store = update.message.text.replace('/', '#')
-            Thought(
-                content=message_to_store,
-                telegram_user_id=update.effective_user.id,
-                created_at=current_milli_time(),
-                telegram_message_id=None,
-            ).save()
+            # TODO: why does recording init matter? (to myself)
+            pass
 
         update.message.reply_text(
             f"Lets get started! {question_in_queue} (/cancel)",
@@ -72,9 +66,10 @@ def routine_constructor(routine_name: str) -> ConversationHandler:
 
         return 1
 
-    def step_qa_constructor(next_step_pointer_for_step: Optional[int]):
+    def step_qa_constructor(
+        next_step_pointer_for_step: Optional[int], current_step: str
+    ):
         def func(update: Update, context: CallbackContext) -> int:
-            user = update.message.from_user
 
             final_question_step_number = list(routine_steps_config.keys())[-1]
 
@@ -85,20 +80,13 @@ def routine_constructor(routine_name: str) -> ConversationHandler:
             )
 
             if last_question_config:
-                last_question_hashtag = last_question_config.get("hashtag")
                 text_response = _get_rating_from_response(
                     last_question_config, update.message
                 )
 
-                message_to_store = f"{last_question_hashtag} {text_response}"
                 should_save = str(text_response).lower() != "skip"
                 if should_save is True:
-                    Thought(
-                        content=message_to_store,
-                        telegram_user_id=user.id,
-                        created_at=current_milli_time(),
-                        telegram_message_id=None,
-                    ).save()
+                    Log.create(value=text_response, key=routine_name)
                 else:
                     update.message.reply_text("Skipped")
 
@@ -129,6 +117,7 @@ def routine_constructor(routine_name: str) -> ConversationHandler:
                 Filters.text & ~Filters.command,
                 step_qa_constructor(
                     next_step_pointer_for_step=next_step_pointer,
+                    current_step=step_config.get("key"),
                 ),
             )
         ]
